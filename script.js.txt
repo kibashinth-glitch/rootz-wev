@@ -1,0 +1,25 @@
+function setImage(el){
+  const g = el.closest(".product-gallery");
+  const main = g.querySelector(".main-img");
+  const thumbs = g.querySelectorAll(".thumbs img");
+
+  main.src = el.src;
+  thumbs.forEach(i=>i.classList.remove("active"));
+  el.classList.add("active");
+}
+
+function nextImage(btn){
+  const g = btn.closest(".product-gallery");
+  const t = [...g.querySelectorAll(".thumbs img")];
+  let i = t.findIndex(x=>x.classList.contains("active"));
+  i = (i+1)%t.length;
+  setImage(t[i]);
+}
+
+function prevImage(btn){
+  const g = btn.closest(".product-gallery");
+  const t = [...g.querySelectorAll(".thumbs img")];
+  let i = t.findIndex(x=>x.classList.contains("active"));
+  i = (i-1+t.length)%t.length;
+  setImage(t[i]);
+}
